@@ -1,31 +1,40 @@
 import * as React from 'react';
-import {
-  useRelayEnvironment,
-  usePreloadedQuery,
-  loadQuery,
-  graphql,
-} from 'react-relay/hooks';
+import { useState } from 'react';
+import axios from 'axios';
 
 function App() {
-  const env = useRelayEnvironment();
-  const UserQuery = graphql`
-        query AppUserQuery {
-            user {
-                name
-                age
-            }
-        }
-  `;
-  const preloadQuery = loadQuery(env, UserQuery, {});
-  const data = usePreloadedQuery(UserQuery, preloadQuery);
+  const [rst, setRst] = useState();
+  const btnSendRequest = async () => {
+    const { data } = await axios.get('/amount/detail/1?test=hi');
+    setRst(data);
+  };
 
-  // const preloadedQuery = loadQuery(RelayEnvironment, UserQuery,{});
-  // const data = usePreloadedQuery(UserQuery, preloadedQuery);
+  const btnSendRequest2 = async () => {
+    const { data } = await axios.post('http://localhost:9999/amount/insert/', {
+      amount: 10,
+    });
+    setRst(data);
+  };
 
   return (
     <div>
-      {JSON.stringify(data)}
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={btnSendRequest}
+      >
+        test
+      </button>
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={btnSendRequest2}
+      >
+        test2
+      </button>
+      {JSON.stringify(rst)}
     </div>
   );
 }
+
 export default App;

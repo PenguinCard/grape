@@ -47,6 +47,10 @@ const webpackConfig = {
     static: './dist',
     port: 9000,
     proxy: {
+      '/amount/': {
+        target: 'http://localhost:9999',
+        changeOrigin: true,
+      },
       '/api/': {
         target: 'http://localhost:9999',
         changeOrigin: true,

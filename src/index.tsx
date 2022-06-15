@@ -6,16 +6,16 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 // bootstrap
-import '@popperjs/core'
-import 'bootstrap/dist/js/bootstrap.js'
+import '@popperjs/core';
+import 'bootstrap/dist/js/bootstrap.js';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // bootstrap icon
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
+import { RelayEnvironmentProvider } from 'react-relay/hooks';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import { RelayEnvironmentProvider } from 'react-relay/hooks';
 
 // component
 import App from './App';
@@ -26,7 +26,7 @@ const root = createRoot(document.getElementById('app'));
 
 root.render(
   <BrowserRouter>
-    <RelayEnvironmentProvider environment={RelayEnvironment} >
+    <RelayEnvironmentProvider environment={RelayEnvironment}>
       <Provider store={store}>
         <App />
       </Provider>
